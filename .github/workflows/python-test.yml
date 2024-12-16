@@ -1,31 +1,33 @@
-name: Python Test
+name: Python tests
 
 on:
   push:
     branches:
-      - main
+      - origin  # 或者是你推送的分支名
   pull_request:
     branches:
-      - main
+      - origin  # 或者是你推送的分支名
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # 使用最新的 Ubuntu 镜像
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.8'  # 或者你使用的 Python 版本
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r requirements.txt  # 如果你有 requirements.txt 文件
 
       - name: Run tests
         run: |
-          pytest
+          pytest  # 如果你使用 pytest 运行测试
+          # 或者是
+          python -m unittest discover  # 如果你使用 unittest 运行测试
